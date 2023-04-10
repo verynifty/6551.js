@@ -10,7 +10,7 @@ function ERC6551Account(instance, chainId, tokenContract, tokenId, implementatio
     this.salt = salt;
     this.address = this.instance.registry.getAccountAddress(chainId, tokenContract, tokenId, implementationAddress, salt);
     this.contract = new ethers.Contract(this.address, accountABI);
-    this.contract.attach(this.instance.provider);
+    this.contract.connect(this.instance.provider);
 }
 
 ERC6551Account.prototype.isDeployed = async function() {
