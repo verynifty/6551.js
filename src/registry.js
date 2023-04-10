@@ -14,7 +14,7 @@ ERC6551Registry.prototype.DEFAULT_BYTECODE = "0x60208038033d393d517f360894a13ba1
 ERC6551Registry.prototype.DEPLOYED_BYTECODE = "0x363d3d3760003560e01c635c60da1b1461004e573d3d363d7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc545af43d6000803e610049573d6000fd5b3d6000f35b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc543d5260203df3"
 
 ERC6551Registry.prototype.getAccount = function(chainId, tokenContract, tokenId, implementationAddress, salt) {
-    return new ERC6551Account(this, this.registry, chainId, tokenContract, tokenId, implementationAddress, salt)
+    return new ERC6551Account(this, chainId, tokenContract, tokenId, implementationAddress, salt)
 }
 
 ERC6551Registry.prototype.doesAccountExists = async function(chainId, tokenContract, tokenId, implementationAddress, salt) {
@@ -48,8 +48,9 @@ ERC6551Registry.prototype.getAccountFromAddress = async function(address) {
     let contract = (new ethers.Contract(address, require("../abis/UUPS.json"))).connect(this.provider)
     const implementation = await contract.implementation();
     const accountData = ethers.AbiCoder.defaultAbiCoder().decode(["uint256", "uint256", "address", "uint256"], "0x" + bytecode.replace(this.DEPLOYED_BYTECODE, ""));
-    console.log(implementation, accountData)
     // need to return an instance of account
+    return this.getAccount(accountData[1].toString(), accountData[2], accountData[3].toString(), implementation, accountData[0].toString());
+
 }
 
 module.exports = ERC6551Registry;
