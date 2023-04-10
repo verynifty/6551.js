@@ -5,11 +5,11 @@ const Registry = new registry();
 
 const testAddress = "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1"
 
-let bytecode = Registry.generateAccountBytecode(0, 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1");
+let bytecode = Registry.generateAccountBytecode(1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 0);
 
 console.log(bytecode)
 
-let address = Registry.getAccountAddress(0, 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1");
+let address = Registry.getAccountAddress(1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 0);
 
 console.log(address)
 
