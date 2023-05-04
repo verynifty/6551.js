@@ -43,10 +43,10 @@ ERC6551Registry.prototype.getAccountAddress = async function(tokenContract, toke
     return address;
 }
 
-ERC6551Registry.prototype.createAccount = async function(tokenContract, tokenId, implementationAddress, salt = 0) {
-    return this.contract.createAccount(implementationAddress, await this.getChainId(), tokenContract, tokenId, salt);
-}
 
+ERC6551Registry.prototype.prepareCreateAccount = async function(tokenContract, tokenId, implementationAddress, salt = 0, params = "0x") {
+    return (await this.contract.createAccount.populateTransaction(implementationAddress, await this.getChainId(), tokenContract, tokenId, salt, params));
+}
 
 // a helper to encapsulate params to be used p = makeParams(a, b, c...) => getAccount(...p)
 ERC6551Registry.prototype.makeParams = async function(tokenContract, tokenId, implementationAddress, salt = 0) {
