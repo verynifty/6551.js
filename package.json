@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/verynifty/6551.js#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "ethers": "^6.3.0"
   }
 }
