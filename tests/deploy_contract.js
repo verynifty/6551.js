@@ -20,5 +20,8 @@ const NFT_ID = 1;
     console.log(a)
 
     let b = await signer.sendTransaction(a)
-console.log(b)
+    console.log(b)
+
+    let account = await Registry.getAccountAddress(NFT_CONTRACT, NFT_ID, NFT_CONTRACT);
+    console.log(account)
 })()
