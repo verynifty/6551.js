@@ -17,7 +17,7 @@ ERC6551Registry.prototype.DEPLOYED_BYTECODE = "0x363d3d3760003560e01c635c60da1b1
 
 ERC6551Registry.prototype.getChainId = async function() {
     if (this.chainId == null) {
-        this.chainId = await this.provider.getNetwork().then(network => network.chainId);
+        this.chainId = parseInt((await this.provider.getNetwork()).chainId)
     }
     return this.chainId;
 } 
@@ -38,7 +38,7 @@ ERC6551Registry.prototype.generateAccountBytecode = async function(tokenContract
 }
 
 ERC6551Registry.prototype.getAccountAddress = async function(tokenContract, tokenId, implementationAddress, salt = 0) {
-    const bytecode = this.generateAccountBytecode(tokenContract, tokenId, implementationAddress, salt);
+    const bytecode = await this.generateAccountBytecode(tokenContract, tokenId, implementationAddress, salt);
     const address = ethers.getCreate2Address(this.DEFAULT_ADDRESS, ethers.solidityPacked(["uint256"], [salt]), ethers.keccak256(bytecode))
     return address;
 }

@@ -15,5 +15,5 @@ const Registry = new registry(signer);
 
     await Registry.getAccountFromAddress("0x10475071Fd1C08166f07E7e75208E31Cd4fAb601")
 
-})()
 
+})()

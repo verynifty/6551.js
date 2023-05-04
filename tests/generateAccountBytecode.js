@@ -1,15 +1,22 @@
 
 const registry = require("../src/registry");
 
-const Registry = new registry();
+const { ethers } = require("ethers");
 
-const testAddress = "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1"
+const provider = new ethers.JsonRpcProvider("https://rpc.ankr.com/eth_goerli");
 
-let bytecode = Registry.generateAccountBytecode(1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 0);
+const Registry = new registry(provider);
 
-console.log("Account bytecode", bytecode)
+const testAddress = "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1";
 
-let address = Registry.getAccountAddress(1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 0);
+(async function () {
 
-console.log("Account address", address)
+    let bytecode = await Registry.generateAccountBytecode("0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 0);
 
+    console.log("Account bytecode", bytecode)
+
+    let address = await Registry.getAccountAddress("0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 1, "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1", 0);
+
+    console.log("Account address", address)
+
+})()
