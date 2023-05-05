@@ -67,4 +67,3 @@ ERC6551Registry.prototype.getAccountFromAddress = async function(address) {
 }
 
 module.exports = ERC6551Registry;
-
