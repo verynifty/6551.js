@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { ethers } = require("ethers");
 
-const registry = require("../src/registry");
+const registry = require("6551.js");
 
 
 const provider = new ethers.JsonRpcProvider("https://rpc.ankr.com/eth_goerli");

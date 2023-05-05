@@ -8,4 +8,7 @@ NFT bound account toolkit for JS.
 npm install 6551.js --save
 ```
 
+Then import in your project:
 
+```
+```

@@ -11,6 +11,8 @@ function ERC6551Registry(provider, address = null) {
     this.contract = (new ethers.Contract(this.address, registryABI)).connect(this.provider);
 }
 
+ERC6551Registry.prototype.Account = ERC6551Account;
+
 ERC6551Registry.prototype.DEFAULT_ADDRESS = "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1";
 ERC6551Registry.prototype.DEFAULT_BYTECODE = "0x60208038033d393d517f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5560f78060343d393df3363d3d3760003560e01c635c60da1b1461004e573d3d363d7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc545af43d6000803e610049573d6000fd5b3d6000f35b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc543d5260203df3"
 ERC6551Registry.prototype.DEPLOYED_BYTECODE = "0x363d3d3760003560e01c635c60da1b1461004e573d3d363d7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc545af43d6000803e610049573d6000fd5b3d6000f35b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc543d5260203df3"
@@ -23,11 +25,11 @@ ERC6551Registry.prototype.getChainId = async function() {
 } 
 
 ERC6551Registry.prototype.getAccount = async function(tokenContract, tokenId, implementationAddress, salt) {
-    return new ERC6551Account(this, await this.getChainId(), tokenContract, tokenId, implementationAddress, salt)
+    return new this.Account(this, await this.getChainId(), tokenContract, tokenId, implementationAddress, salt)
 }
 
 ERC6551Registry.prototype.doesAccountExists = async function( tokenContract, tokenId, implementationAddress, salt = 0) {
-    const account = new ERC6551Account(await this.getChainId(), this.registry, chainId, tokenContract, tokenId, implementationAddress, salt)
+    const account = new this.Account(await this.getChainId(), this.registry, chainId, tokenContract, tokenId, implementationAddress, salt)
     return await account.isDeployed()
 }
 
