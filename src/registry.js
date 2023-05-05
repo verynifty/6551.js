@@ -13,6 +13,8 @@ function ERC6551Registry(provider, address = null) {
 
 ERC6551Registry.prototype.Account = ERC6551Account;
 
+ERC6551Registry.prototype.DEFAULT_IMPLEMENTATION = "0x36963236d915e4e9b5f70677eBD1ea3e69Cfbbd6";
+
 ERC6551Registry.prototype.DEFAULT_ADDRESS = "0x3DB6292002BEf4DF017F566a0D038755Bb2AdAE1";
 ERC6551Registry.prototype.DEFAULT_BYTECODE = "0x60208038033d393d517f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5560f78060343d393df3363d3d3760003560e01c635c60da1b1461004e573d3d363d7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc545af43d6000803e610049573d6000fd5b3d6000f35b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc543d5260203df3"
 ERC6551Registry.prototype.DEPLOYED_BYTECODE = "0x363d3d3760003560e01c635c60da1b1461004e573d3d363d7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc545af43d6000803e610049573d6000fd5b3d6000f35b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc543d5260203df3"
@@ -24,22 +26,34 @@ ERC6551Registry.prototype.getChainId = async function() {
     return this.chainId;
 } 
 
-ERC6551Registry.prototype.getAccount = async function(tokenContract, tokenId, implementationAddress, salt) {
+ERC6551Registry.prototype.getAccount = async function(tokenContract, tokenId, implementationAddress, salt = 0) {
+    if (implementationAddress == null) {
+        implementationAddress = this.DEFAULT_IMPLEMENTATION;
+    }
     return new this.Account(this, await this.getChainId(), tokenContract, tokenId, implementationAddress, salt)
 }
 
 ERC6551Registry.prototype.doesAccountExists = async function( tokenContract, tokenId, implementationAddress, salt = 0) {
+    if (implementationAddress == null) {
+        implementationAddress = this.DEFAULT_IMPLEMENTATION;
+    }
     const account = new this.Account(await this.getChainId(), this.registry, chainId, tokenContract, tokenId, implementationAddress, salt)
     return await account.isDeployed()
 }
 
 ERC6551Registry.prototype.generateAccountBytecode = async function(tokenContract, tokenId, implementationAddress, salt = 0) {
+    if (implementationAddress == null) {
+        implementationAddress = this.DEFAULT_IMPLEMENTATION;
+    }
     const appendData = ethers.AbiCoder.defaultAbiCoder().encode(["uint256", "uint256", "address", "uint256", "address"], [salt, await this.getChainId(), tokenContract, tokenId, implementationAddress]).replace("0x", "");
     const finalBytecode = this.DEFAULT_BYTECODE + appendData;
     return finalBytecode;
 }
 
 ERC6551Registry.prototype.getAccountAddress = async function(tokenContract, tokenId, implementationAddress, salt = 0) {
+    if (implementationAddress == null) {
+        implementationAddress = this.DEFAULT_IMPLEMENTATION;
+    }
     const bytecode = await this.generateAccountBytecode(tokenContract, tokenId, implementationAddress, salt);
     const address = ethers.getCreate2Address(this.DEFAULT_ADDRESS, ethers.solidityPacked(["uint256"], [salt]), ethers.keccak256(bytecode))
     return address;
@@ -47,6 +61,9 @@ ERC6551Registry.prototype.getAccountAddress = async function(tokenContract, toke
 
 
 ERC6551Registry.prototype.prepareCreateAccount = async function(tokenContract, tokenId, implementationAddress, salt = 0, params = "0x") {
+    if (implementationAddress == null) {
+        implementationAddress = this.DEFAULT_IMPLEMENTATION;
+    }
     return (await this.contract.createAccount.populateTransaction(implementationAddress, await this.getChainId(), tokenContract, tokenId, salt, params));
 }
 
