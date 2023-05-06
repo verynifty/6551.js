@@ -1,6 +1,6 @@
 # 6551.js
 
-6551.js is a tiny library to help working with Non-fungible Token Bound Accounts. 
+6551.js is a tiny non official library to help working with Non-fungible Token Bound Accounts. 
 
 You can read more about them here:
 - [EIP on ethereum.org](https://eips.ethereum.org/EIPS/eip-6551)
