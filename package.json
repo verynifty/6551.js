@@ -1,6 +1,6 @@
 {
   "name": "6551.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NFT Bound account JS toolkit ",
   "main": "src/registry.js",
   "scripts": {
@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/verynifty/6551.js#readme",
   "dependencies": {
-    "6551.js": "^1.0.0",
     "dotenv": "^16.0.3",
     "ethers": "^6.3.0"
   }

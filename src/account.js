@@ -20,8 +20,8 @@ ERC6551Account.prototype.createAccount = function(chainId, tokenContract, tokenI
     return this.registry.createAccount(this.implementationAddress, this.chainId, this.tokenContract, this.tokenId, this.salt);
 }
 
-ERC6551Account.prototype.executeCall = async function(to, value, data) {
-    return (this.contract.executeCall(to, value, data));
+ERC6551Account.prototype.prepareExecuteCall = async function(to, value, data) {
+    return (this.contract.executeCall.populateTransaction(to, value, data));
 }
 
 ERC6551Account.prototype.nonce = async function() {
