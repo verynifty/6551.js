@@ -1,11 +1,13 @@
 # 6551.js
 
-6551.js is a tiny library to help working with Non-fungible Token Bound Accounts. You can read more about them here:
-- [https://eips.ethereum.org/EIPS/eip-6551](EIP on ethereum.org)
-- [https://ethereum-magicians.org/t/erc-6551-non-fungible-token-bound-accounts/13030](EIP on ethereum magicians)
-- [https://eips.ethereum.org/EIPS/eip-6551](EIP on ethereum.org)
-- [https://github.com/tokenbound/contracts](Official implementation)
-- [https://github.com/tokenbound/sdk](Official SDK)
+6551.js is a tiny library to help working with Non-fungible Token Bound Accounts. 
+
+You can read more about them here:
+- [EIP on ethereum.org](https://eips.ethereum.org/EIPS/eip-6551)
+- [EIP on ethereum magicians](https://ethereum-magicians.org/t/erc-6551-non-fungible-token-bound-accounts/13030)
+- [EIP on ethereum.org](https://eips.ethereum.org/EIPS/eip-6551)
+- [Official implementation](https://github.com/tokenbound/contracts)
+- [Official SDK](https://github.com/tokenbound/sdk)
 
 ## Installation
 
